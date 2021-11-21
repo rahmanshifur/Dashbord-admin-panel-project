@@ -1,0 +1,52 @@
+// GLOBAL START
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+li,
+a {
+    list-style-type: none;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fff;
+}
+
+
+
+#middle-content {
+    float: left;
+    width: calc(100% - 250px);
+    margin: 0;
+    padding: 12px;
+
+    table {
+        width: 100%;
+    }
+}
+
+.content {
+    width: 100%;
+}
+
+footer{
+    width: 100%;
+    display: inline-block;
+}
+
+// GLOBAL END

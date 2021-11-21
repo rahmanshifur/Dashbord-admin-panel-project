@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// IMPORT COMPONENTS
+import App from './app/index';
+import store from './store';
+
+// IMPORT STYLE
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '.././src/assets/scss/style.scss'
+
+// Demo styles, see 'Styles' section below for some notes on use.
+import 'react-accessible-accordion/dist/fancy-example.css';
+
+// IMPORT STORE PROVIDER FROM EASY peasy
+import { StoreProvider } from 'easy-peasy'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StoreProvider store={store} >
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

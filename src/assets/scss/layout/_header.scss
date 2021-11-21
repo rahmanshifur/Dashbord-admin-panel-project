@@ -1,0 +1,86 @@
+// Header START
+#navbar {
+    .navbar-content {
+        background: #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .navbar-brand {
+            padding: 15px 0px 15px 50px;
+
+            a {
+                display: flex;
+                align-items: center;
+
+                img {
+                    height: 45px;
+                    width: 45px;
+                    padding: 5px;
+                    margin-right: 5px;
+                }
+
+                span {
+                    font-size: 26px;
+                    color: #000;
+                }
+            }
+        }
+
+        .search-bar {
+            form{
+                height: 30px;
+                width: 250px;
+                background-color: #fff;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+
+                a {
+                    font-size: 17px;
+                    color: #000;
+                    margin-right: 7px;
+                    margin-left: 7px;
+                }
+
+                input {
+                    background-color: #fff;
+                    border: none;
+                    outline: none;
+                    width: 100%;
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        .navbar-right {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: 15px;
+
+            a {
+                margin-right: 15px;
+                color: #000;
+            }
+        }
+
+        .user-wrapper {
+
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            a{
+            margin-right:0;
+            img {
+                height: 40px;
+                width: 40px;
+                border-radius: 40px 40px;
+            }
+          }
+        }
+    }
+}
+
+// Header END
