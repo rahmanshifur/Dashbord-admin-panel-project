@@ -14,8 +14,7 @@ function ProductDetails(props) {
     const details = useStoreState(state => state.product.details)
     const colorData = useStoreState(state => state.color.data)
     const sizeData = useStoreState(state => state.size.data)
-
-    console.log('props', props)
+    const isAuth = useStoreState(state => state.auth.isAuth)
 
 
     useEffect(() => {
@@ -50,7 +49,8 @@ function ProductDetails(props) {
                     </Row>
                 </div>}
             <div>
-            <Review pdtId={details._id} />
+                {isAuth &&
+                    <Review pdtId={details._id} />}
             </div>
         </div>
     )

@@ -1,37 +1,24 @@
-import { useStoreActions, useStoreState } from "easy-peasy"
-import { useState } from "react"
-import { useEffect } from "react/cjs/react.development"
+import { useStoreActions } from "easy-peasy"
+import { useState, useEffect } from "react"
 import { Button, Col, Form, FormFeedback, FormGroup, Input, Label, Row } from "reactstrap"
 
 
-function CreateUpdate({ addHandler, editData }) {
+function CreateUpdate({ addHandler, editData, userId, pdtId }) {
 
     const [error, setError] = useState({})
     const [id, setId] = useState('')
-    const [product, setProduct] = useState('')
-    const [user, setUser] = useState('')
     const [comment, setComment] = useState('')
     const [rating, setRating] = useState('')
 
     const createReview = useStoreActions(action => action.review.create)
     const updateReview = useStoreActions(action => action.review.update)
-    const getProduct = useStoreActions(action => action.product.getProduct)
-    const getUser = useStoreActions(action => action.user.getUser)
 
-    const productData = useStoreState(state => state.product.data)
-    const userData = useStoreState(state => state.user.data)
 
     useEffect(() => {
-        if (productData.length === 0) {
-            getProduct()
-        }
-        if (userData.length === 0) {
-            getUser()
-        }
         setId(editData._id)
         setComment(editData.comment)
         setRating(editData.rating)
-    }, [editData, getUser, getProduct])
+    }, [editData])
 
 
     function submitHandler(e) {
@@ -42,8 +29,8 @@ function CreateUpdate({ addHandler, editData }) {
         }
 
         let obj = {
-            product,
-            user,
+            product: pdtId,
+            user: userId,
             comment,
             rating
         }
@@ -57,14 +44,6 @@ function CreateUpdate({ addHandler, editData }) {
 
     function validation() {
         const error = {}
-
-        if (!product) {
-            error.product = 'The product field is required!'
-        }
-
-        if (!user) {
-            error.user = 'The user field is required!'
-        }
 
         if (!comment) {
             error.comment = 'The comment field is required!'
@@ -81,8 +60,6 @@ function CreateUpdate({ addHandler, editData }) {
 
     function successHandler() {
         setId('')
-        setProduct('')
-        setUser('')
         setComment('')
         setRating('')
         addHandler()
@@ -95,36 +72,6 @@ function CreateUpdate({ addHandler, editData }) {
                     <Form onSubmit={submitHandler} className=' p-4'>
                         <h4>{id ? 'Update' : 'Create'} Review:</h4>
                         <hr />
-                        {!id &&
-                            <FormGroup>
-                                <Label><b>Product:</b></Label>
-                                <Input
-                                    type='select'
-                                    value={product}
-                                    onChange={(e) => setProduct(e.target.value)}
-                                    invalid={error.product !== undefined}
-                                >
-                                    <option value=''>Select Product</option>
-                                    {productData.length !== 0 && productData.map(pdt =>
-                                        <option key={pdt._id} value={pdt._id}>{pdt.title}</option>)}
-                                </Input>
-                                <FormFeedback>{error.product}</FormFeedback>
-                            </FormGroup>}
-                        {!id &&
-                            <FormGroup>
-                                <Label><b>User:</b></Label>
-                                <Input
-                                    type='select'
-                                    value={user}
-                                    onChange={(e) => setUser(e.target.value)}
-                                    invalid={error.user !== undefined}
-                                >
-                                    <option value=''>Select User</option>
-                                    {userData.length !== 0 && userData.map(user =>
-                                        <option key={user._id} value={user._id}>{user.firstName} {user.lastName}</option>)}
-                                </Input>
-                                <FormFeedback>{error.user}</FormFeedback>
-                            </FormGroup>}
                         <FormGroup>
                             <Label><b>Comment:</b></Label>
                             <Input
@@ -138,19 +85,23 @@ function CreateUpdate({ addHandler, editData }) {
                         </FormGroup>
                         <FormGroup>
                             <Label><b>Rating:</b></Label>
-                            <Input
-                                type='select'
-                                value={rating}
-                                onChange={(e) => setRating(e.target.value)}
-                                invalid={error.rating !== undefined}
-                            >
-                                <option value=''>Select Rating</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='4'>4</option>
-                            </Input>
+                            <ul className="rating ps-0 d-flex">
+                                <li className={rating > 0 ? 'active' : ''} onClick={() => setRating(1)}>
+                                    <i class="fa fa-star" ></i>
+                                </li>
+                                <li className={rating > 1 ? 'active' : ''} onClick={() => setRating(2)}>
+                                    <i class="fa fa-star" ></i>
+                                </li>
+                                <li className={rating > 2 ? 'active' : ''} onClick={() => setRating(3)}>
+                                    <i class="fa fa-star" ></i>
+                                </li>
+                                <li className={rating > 4 ? 'active' : ''} onClick={() => setRating(5)}>
+                                    <i class="fa fa-star" ></i>
+                                </li>
+                                <li className={rating > 5 ? 'active' : ''} onClick={() => setRating(6)}>
+                                    <i class="fa fa-star" ></i>
+                                </li>
+                            </ul>
                             <FormFeedback>{error.rating}</FormFeedback>
                         </FormGroup>
                         <Button type="submit" class="btn btn-success mt-3">Submit</Button>

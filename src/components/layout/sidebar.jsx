@@ -72,6 +72,12 @@ function Sidebar() {
                             <span>Product</span>
                         </Link>
                     </li>
+                    <li>
+                        <Link to='/admin-review'>
+                            <img src={noImg} alt="" />
+                            <span>Review</span>
+                        </Link>
+                    </li>
 
                 </ul>
 
@@ -80,10 +86,10 @@ function Sidebar() {
                 <ul>
                     <p>User view</p>
                     <li>
-                        <a href="#">
+                        <Link to="/all-products">
                             <img src={mainLogo} alt="" />
-                            <Link className='ps-0' to="/all-products">All Products</Link>
-                        </a>
+                            All Products
+                        </Link>
                     </li>
                     <li>
                         <div className=''>

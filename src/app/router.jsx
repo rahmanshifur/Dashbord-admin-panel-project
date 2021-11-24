@@ -26,6 +26,7 @@ import ProductDetails from '../pages/product-details';
 import ScatProducts from '../pages/scat-products';
 import SearchResult from '../pages/search-result';
 import Review from './../pages/review/index';
+import ReviewList from '../pages/admin-review/review-list';
 
 function AppRouter() {
     const authUser = useStoreState(state => state.auth.isAuth)
@@ -54,6 +55,7 @@ function PrivateRouter() {
     return (
         <Layout>
             <Router>
+                <ReviewList path='/admin-review' />
                 <Review path='/review' />
                 <SearchResult path='/search-result' />
                 <ScatProducts path='/category/:catId/:catName/:scatId/:scatName' />

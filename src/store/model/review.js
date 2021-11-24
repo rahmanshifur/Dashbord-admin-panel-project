@@ -37,6 +37,19 @@ const ReviewModel = {
             console.log(error)
         }
     }),
+    activeInactive: thunk(async (action, payload, { getState }) => {
+        try {
+            let response = await Axios.put(`${API_URL}/reviews/activeInactive/${payload.id}/${payload.status}`)
+            getState().data = getState().data.map(item => {
+                if (item._id === response.data.data._id) {
+                    item.status = response.data.data.status
+                }
+                return item
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }),
     remove: thunk(async (action, payload, { getState }) => {
         try {
             await Axios.delete(`${API_URL}/reviews/${payload}`)

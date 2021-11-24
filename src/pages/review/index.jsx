@@ -1,4 +1,4 @@
-import { useStoreActions } from "easy-peasy"
+import { useStoreActions, useStoreState } from "easy-peasy"
 import { useState } from "react"
 import { useEffect } from "react"
 import CreateUpdate from "./create-update"
@@ -7,10 +7,11 @@ import ListItems from "./list-items"
 
 function Review(props) {
 
-    console.log('Review', props)
 
     const [isOpen, setIsOpen] = useState(false)
     const [editData, setEditData] = useState({})
+
+    const authUser = useStoreState(state => state.auth.user)
 
     const getReview = useStoreActions(action => action.review.getReview)
 
@@ -26,14 +27,20 @@ function Review(props) {
 
     return (
         <div className='border mt-4'>
-            Review page
             {isOpen &&
-                <CreateUpdate editData={editData} addHandler={addHandler} />}
+                <CreateUpdate
+                    editData={editData}
+                    addHandler={addHandler}
+                    userId={authUser._id}
+                    pdtId={props.pdtId}
+
+                />}
 
             <ListItems
                 addHandler={addHandler}
                 isOpen={isOpen || Object.keys(editData).length !== 0}
                 pdtId={props.pdtId}
+                editData={editData}
             />
         </div>
     )
