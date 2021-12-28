@@ -14,7 +14,7 @@ function User() {
     const resetEdit = useStoreActions(action => action.user.resetEdit)
 
     useEffect(() => {
-        if (userData.length === 0) {
+        if (userData.length !== 0) {
             getUser()
         }
         setIsOpen(Object.keys(editData).length !== 0)

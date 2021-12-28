@@ -7,6 +7,7 @@ import ListItems from "./list-items"
 
 function Review(props) {
 
+    console.log('22', props)
 
     const [isOpen, setIsOpen] = useState(false)
     const [editData, setEditData] = useState({})
@@ -32,7 +33,7 @@ function Review(props) {
                     editData={editData}
                     addHandler={addHandler}
                     userId={authUser._id}
-                    pdtId={props.pdtId}
+                    pdtId={'22', props.pdtId}
 
                 />}
 
@@ -47,3 +48,5 @@ function Review(props) {
 }
 
 export default Review
+
+// 61b1a40660676c20c046b100

@@ -9,7 +9,8 @@ const ProductModel = {
     getProduct: thunk(async (action, payload, { getState }) => {
         try {
             let response = await Axios.get(`${API_URL}/products`)
-            getState().data = response.data.data
+            console.log('response1', response)
+            getState().data = response.data?.data || []
         } catch (error) {
             console.log(error)
         }
@@ -34,7 +35,6 @@ const ProductModel = {
     getCatId: thunk(async (action, payload, { getState }) => {
         try {
             let response = await Axios.get(`${API_URL}/products/getByCatId/${payload}`)
-            console.log(response)
             getState().data = response.data.data
         } catch (error) {
             console.log(error)
@@ -44,15 +44,16 @@ const ProductModel = {
     getScatId: thunk(async (action, payload, { getState }) => {
         try {
             let response = await Axios.get(`${API_URL}/products/getBySubCatId/${payload}`)
-            console.log(response)
             getState().data = response.data.data
         } catch (error) {
             console.log(error)
         }
     }),
     create: thunk(async (action, payload, { getState }) => {
+        console.log('payload', payload)
         try {
             let response = await Axios.post(`${API_URL}/products`, payload.data)
+            console.log('response', response)
             getState().data = [response.data.data, ...getState().data]
             payload.successHandler()
         } catch (error) {
@@ -60,7 +61,6 @@ const ProductModel = {
         }
     }),
     update: thunk(async (action, payload, { getState }) => {
-        console.log('payload', payload)
         try {
             let response = await Axios.put(`${API_URL}/products/${payload.id}`, payload.data)
             getState().data = getState().data.map(item => {

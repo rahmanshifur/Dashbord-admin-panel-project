@@ -1,4 +1,4 @@
-import { useStoreActions } from "easy-peasy"
+import { useStoreActions, useStoreState } from "easy-peasy"
 import { useState, useEffect } from "react"
 import CreateUpdate from "./create-update"
 import ListItems from "./list-items"
@@ -9,9 +9,12 @@ function Subcategory() {
     const [editData, setEditData] = useState({})
 
     const getSubcategory = useStoreActions(action => action.subcategory.getSubcategory)
+    const subcategoryData = useStoreState(state => state.subcategory.data)
 
     useEffect(() => {
-        getSubcategory()
+        if (subcategoryData.length === 0) {
+            getSubcategory()
+        }
     }, [getSubcategory])
 
     function addHandler(item = {}) {

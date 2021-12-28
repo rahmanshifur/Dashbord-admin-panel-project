@@ -11,6 +11,7 @@ function ListItems({ addHandler, isOpen }) {
     const sizeData = useStoreState(state => state.size.data)
     const removeProduct = useStoreActions(action => action.product.remove)
 
+    { console.log('productData', productData) }
 
 
     return (
@@ -38,6 +39,7 @@ function ListItems({ addHandler, isOpen }) {
                     <tbody>
                         {productData && productData.length !== 0 && productData.map((item, i) =>
                             <tr key={item._id}>
+                                {console.log('item', item)}
                                 <td>{++i}</td>
                                 <td>
                                     {<Link to={`/product-details/${item._id}/${replace(item.title)}`}>{item.title}</Link>}
@@ -45,12 +47,13 @@ function ListItems({ addHandler, isOpen }) {
                                 <td>{item.description}</td>
                                 <td>BDT{item.price}</td>
                                 <td>{item.discount}%</td>
-                                <td>{item.subcategory.name}</td>
+                                <td>{item.subcategory?.name}</td>
                                 <td>{sizeData.length !== 0 && sizeData.map(siz => item.sizes.includes(siz._id) && <span key={siz._id}>{siz.name}{' '}</span>)}</td>
                                 <td>{colorData.length !== 0 && colorData.map(clr => item.colors.includes(clr._id) && <span key={clr._id}>{clr.name}{' '}</span>)}</td>
                                 <td>
                                     <Button onClick={() => addHandler(item)}>Edit</Button>
-                                    <Button className="ms-3 btn-danger" onClick={() => removeProduct(item._id)}>Delete</Button>
+                                    <Link className='btn btn-primary mx-3' to={`/product-details/${item._id}/${item.title}`}>Details</Link>
+                                    <Button className=" btn-danger" onClick={() => removeProduct(item._id)}>Delete</Button>
                                 </td>
                             </tr>)}
                     </tbody>

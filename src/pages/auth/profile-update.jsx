@@ -13,7 +13,6 @@ function ProfileUpdate({ toggle }) {
     const [address, setAddress] = useState('')
     const [contact, setContact] = useState('')
 
-    const getProfileInformation = useStoreActions(action => action.auth.getProfileInformation)
     const profileUpdate = useStoreActions(action => action.auth.profileUpdate)
     const profileData = useStoreState(state => state.auth.profileInformation)
 

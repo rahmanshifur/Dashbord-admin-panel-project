@@ -1,4 +1,4 @@
-import { useStoreActions } from "easy-peasy"
+import { useStoreActions, useStoreState } from "easy-peasy"
 import { useState } from "react"
 import { useEffect } from "react"
 import CreateUpdate from "./create-update"
@@ -9,10 +9,13 @@ function Category() {
     const [editData, setEditData] = useState({})
 
     const getCategory = useStoreActions(action => action.category.getCategory)
+    const categoryData = useStoreState(state => state.category.data)
 
     useEffect(() => {
-        getCategory()
-    }, [getCategory])
+        if (categoryData.length === 0) {
+            getCategory()
+        }
+    }, [])
 
 
     function addHandler(item = {}) {

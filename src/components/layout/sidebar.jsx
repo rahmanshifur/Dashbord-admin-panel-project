@@ -13,6 +13,7 @@ function Sidebar() {
     const getSubcategory = useStoreActions(action => action.subcategory.getSubcategory)
     const categoryData = useStoreState(state => state.category.data)
     const subcategoryData = useStoreState(state => state.subcategory.data)
+    const user = useStoreState(state => state.auth.user)
 
 
     useEffect(() => {
@@ -26,7 +27,7 @@ function Sidebar() {
 
     return (
         <aside id='sidebar' className="clearfix">
-
+            {/* {user.type !== 1 ? */}
             <div className="sidebar-nav">
                 <ul>
                     <p>Admin view</p>
@@ -78,10 +79,16 @@ function Sidebar() {
                             <span>Review</span>
                         </Link>
                     </li>
+                    <li>
+                        <Link to='/admin-order'>
+                            <img src={noImg} alt="" />
+                            <span>Order</span>
+                        </Link>
+                    </li>
 
                 </ul>
-
             </div>
+            {/* : */}
             <div className="sidebar-menu">
                 <ul>
                     <p>User view</p>
@@ -100,7 +107,7 @@ function Sidebar() {
                                         <span>{cat.name}</span>
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        {subcategoryData.length !== 0 && subcategoryData.map(scat => scat.category._id === cat._id &&
+                                        {subcategoryData.length !== 0 && subcategoryData.map(scat => scat.category?._id === cat._id &&
                                             <DropdownItem key={scat._id} className='scat'>
                                                 <Link to={`/category/${cat._id}/${cat.name}/${scat._id}/${scat.name}`} className='nav-link text-dark'>{scat.name}</Link>
                                             </DropdownItem>)}
@@ -116,6 +123,7 @@ function Sidebar() {
                     </li>
                 </ul>
             </div>
+            {/* } */}
         </aside>
     )
 }

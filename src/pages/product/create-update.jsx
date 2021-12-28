@@ -44,7 +44,7 @@ function CreateUpdate({ editData, toggle }) {
             setDescription(editData.description)
             setPrice(editData.price)
             setDiscount(editData.discount)
-            setSubcategory(editData.subcategory._id)
+            setSubcategory(editData.subcategory?._id)
             setSizes(editData.sizes)
             setColors(editData.colors)
         }
@@ -70,7 +70,6 @@ function CreateUpdate({ editData, toggle }) {
             return;
         }
         createProduct({ data: obj, successHandler })
-
     }
 
     function validation() {
@@ -97,7 +96,6 @@ function CreateUpdate({ editData, toggle }) {
         if (!colors) {
             error.colors = 'The colors field is required!'
         }
-
         setError(error)
         return Object.keys(error).length === 0
     }

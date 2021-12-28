@@ -19,6 +19,8 @@ function ChangePassword({ toggle }) {
             return
         }
 
+
+
         if (password !== confirmPassword) {
             alert(`Confirm password doesn't match`)
             return

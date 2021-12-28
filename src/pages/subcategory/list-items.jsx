@@ -8,8 +8,6 @@ function ListItems({ addHandler, isOpen }) {
 
     const subcategoryData = useStoreState(state => state.subcategory.data)
     const removeSubcategory = useStoreActions(action => action.subcategory.remove)
-    const categoryData = useStoreState(state => state.category.data)
-
 
     return (
         <div className='subcategory-list text-center'>
@@ -32,7 +30,7 @@ function ListItems({ addHandler, isOpen }) {
                         {subcategoryData && subcategoryData.length !== 0 && subcategoryData.map((item, i) =>
                             <tr key={item._id}>
                                 <td>{++i}</td>
-                                <td>{item.category.name}</td>
+                                <td>{item.category?.name}</td>
                                 <td>
                                     {<Link to={`/subcategory/${item._id}/${replace(item.name)}`}>{item.name}</Link>}
                                 </td>

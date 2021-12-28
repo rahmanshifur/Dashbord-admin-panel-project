@@ -27,6 +27,10 @@ import ScatProducts from '../pages/scat-products';
 import SearchResult from '../pages/search-result';
 import Review from './../pages/review/index';
 import ReviewList from '../pages/admin-review/review-list';
+import ShoppingCart from '../pages/shopping-cart';
+import Checkout from './../pages/checkout/index';
+import AdminOrder from '../pages/admin-order';
+import UserOrder from '../pages/user-order';
 
 function AppRouter() {
     const authUser = useStoreState(state => state.auth.isAuth)
@@ -55,6 +59,10 @@ function PrivateRouter() {
     return (
         <Layout>
             <Router>
+                <UserOrder path='/user-order' />
+                <AdminOrder path='/admin-order' />
+                <Checkout path='/checkout' />
+                <ShoppingCart path='/cart' />
                 <ReviewList path='/admin-review' />
                 <Review path='/review' />
                 <SearchResult path='/search-result' />
